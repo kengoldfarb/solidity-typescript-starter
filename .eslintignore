@@ -1,0 +1,9 @@
+node_modules
+.circleci
+.vscode
+.github
+.git
+.serverless
+build
+logs
+tmp

@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run: yarn install --frozen-lockfile
+      - run: yarn run lint
+      - run: yarn run test
+  release:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run: yarn install --frozen-lockfile
+      - run: git config --global user.email "$GIT_AUTHOR_EMAIL"
+      - run: git config --global user.name "$GIT_AUTHOR_NAME"
+      - run: yarn run release
+workflows:
+  version: 2
+  do_build:
+    jobs:
+      - test:
+          context: private_packages
+          filters:
+            branches:
+              ignore:
+                - master
+      - release:
+          context: private_packages
+          filters:
+            branches:
+              only:
+                - dev
+                - stage
+                - master
+

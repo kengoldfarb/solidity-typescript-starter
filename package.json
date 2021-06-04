@@ -1,0 +1,60 @@
+{
+	"name": "@kengoldfarb/solidity-typescript-starter",
+	"version": "1.0.0",
+	"description": "Etherium smart contract starter project using solidity and typescript",
+	"engines": {
+		"node": "^12"
+	},
+	"scripts": {
+		"build": "tsc && echo \"Finished transpiling TS files\"",
+		"watch": "concurrently \"yarn watch:typescript\" \"yarn watch:solidity\"",
+		"watch:typescript": "chokidar \"src/**/*.ts\" -c \"yarn build\"",
+		"watch:solidity": "chokidar \"src/**/*.sol\" -c \"yarn compile && yarn generateTypes\"",
+		"compile": "truffle compile",
+		"migrate": "truffle migrate",
+		"generateTypes": "typechain --target=truffle-v5 'build/contracts/*.json'",
+		"generate": "yarn compile && yarn generateTypes",
+		"lint": "eslint 'src/**/*.ts'",
+		"lint:fix": "eslint --fix 'src/**/*.ts'",
+		"solhint": "solhint 'src/**/*.sol'",
+		"solhint:fix": "solhint --fix 'src/**/*.sol'"
+	},
+	"dependencies": {
+		"@kengoldfarb/log": "^1.0.3",
+		"solc": "^0.8.4"
+	},
+	"devDependencies": {
+		"@kengoldfarb/semantic-release-config": "^1.0.0",
+		"@typechain/truffle-v5": "^5.0.0",
+		"@types/bn.js": "^4.11.6",
+		"@types/chai": "^4.2.11",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^15.12.0",
+		"@types/web3": "^1.2.2",
+		"babel-eslint": "^10.1.0",
+		"chokidar-cli": "^2.1.0",
+		"concurrently": "^6.2.0",
+		"eslint": "^7",
+		"eslint-config-kengoldfarb": "^1.3.0",
+		"prettier": "^2.0.5",
+		"prettier-plugin-solidity": "^1.0.0-beta.11",
+		"solhint": "^3.3.6",
+		"truffle": "^5",
+		"truffle-typings": "^1.0.8",
+		"ts-node": "^9",
+		"ts-node-dev": "1.0.0-pre.44",
+		"typechain": "^5.0.0",
+		"typechain-target-truffle": "^1.0.2",
+		"typescript": "^4.3.2"
+	},
+	"optionalDependencies": {
+		"fsevents": "^2"
+	},
+	"author": "Ken Goldfarb <hello@kengoldfarb.com> (https://kengoldfarb.com)",
+	"contributors": [
+		{
+			"name": "Ken Goldfarb",
+			"email": "hello@kengoldfarb.com"
+		}
+	]
+}
